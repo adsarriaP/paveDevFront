@@ -1,0 +1,30 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app.dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.app.light {
+  background-color: #f0f0f0;
+  color: #000000;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.charts {
+  display: flex;
+  gap: 20px;
+}
