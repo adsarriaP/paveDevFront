@@ -108,7 +108,7 @@ export const navGroups: NavGroup[] = [
   {
     title: 'Aplazamientos',
     icon: CalendarX2,
-    disabled: true, // true (bloqueo) false (habilitado) el grupo de Aplazamientos
+    disabled: false, // true (bloqueo) false (habilitado) el grupo de Aplazamientos
     items: [
       {
         title: 'Solicitar aplazamiento',
