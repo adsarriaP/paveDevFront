@@ -616,7 +616,7 @@ export function TableSolicitudes() {
       doc.setFont('helvetica', 'normal');
 
       // Párrafo introductorio
-      doc.text(`En atención a su solicitud con visto bueno de Gerente Area Abastecimiento Empresarial, mediante oficio 9000014742025, me permito dar respuesta al disfrute de sus vacaciones así:`,
+      doc.text(`En atención a su solicitud con visto bueno del Area, mediante oficio 9000014742025, me permito dar respuesta al disfrute de sus vacaciones así:`,
         30, 120, { maxWidth: pageWidth - 60 }
       );
 

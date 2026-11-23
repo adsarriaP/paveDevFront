@@ -1,0 +1,27 @@
+{
+  "pave-front-session-context": {
+    "enabled": true,
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "powershell -NoProfile -ExecutionPolicy Bypass -File ./hooks/session-context.ps1",
+        "timeout": 10
+      }
+    ]
+  },
+  "pave-front-post-edit-check": {
+    "enabled": true,
+    "PostToolUse": [
+      {
+        "matcher": "edit_file|write_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File ./hooks/post-edit-check.ps1",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

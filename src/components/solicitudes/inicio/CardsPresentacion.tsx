@@ -3,10 +3,10 @@ import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
-// import { FormularioSolicitud } from './FormularioSolicitud'; // Oculto: formulario "Solicitar Cambio de Fechas" deshabilitado en Inicio
+import { FormularioSolicitud } from './FormularioSolicitud';
 import { usePeriodoActivo } from '@/hooks/usePeriodoActivo';
 import { useApi } from '@/hooks/useApi';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { formatFechaDisplay } from '@/lib/date-utils';
 // import CardsNotificacionDisfrute from './CardsNotificacionDisfrute';
 
@@ -40,10 +40,22 @@ interface VacacionesResponse {
 
 const CardsPresentacion = () => {
   const user = useSelector((state: RootState) => state.auth.user);
+  const periodoAcceso = useSelector(
+    (state: RootState) => state.auth.periodoAcceso
+  );
   const { periodo } = usePeriodoActivo();
   const { get } = useApi();
   const [vacaciones, setVacaciones] = useState<VacacionUsuario[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Verificar si estamos dentro de un periodo de acceso vigente para mostrar el formulario
+  const isDentroDePeriodo = useMemo(() => {
+    if (!periodoAcceso) return false;
+    const fechaActual = new Date();
+    const fechaInicio = new Date(periodoAcceso.fecha_inicio);
+    const fechaFin = new Date(periodoAcceso.fecha_fin);
+    return fechaActual >= fechaInicio && fechaActual <= fechaFin;
+  }, [periodoAcceso]);
 
   const fetchVacaciones = async () => {
     try {
@@ -241,10 +253,12 @@ const CardsPresentacion = () => {
           </Card>
         )}
 
-        {/* FORMULARIO - Oculto para todos los usuarios (solicitud de cambio de fechas deshabilitada en Inicio) */}
-        {/* <div className="mt-6">
-          <FormularioSolicitud />
-        </div> */}
+        {/* FORMULARIO - Solo se muestra cuando existe un periodo de acceso activo y vigente */}
+        {isDentroDePeriodo && (
+          <div className="mt-6">
+            <FormularioSolicitud />
+          </div>
+        )}
       </div>
       {/* <div className="space-y-6">
         <CardsNotificacionDisfrute />

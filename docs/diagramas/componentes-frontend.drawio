@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" modified="2026-11-18T22:05:00.000Z" agent="Antigravity" version="24.7.0" type="device">
+  <diagram id="comp-front-pave" name="Componentes Frontend PAVE">
+    <mxGraphModel dx="1500" dy="950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="ft1" value="Diagrama de Componentes — pave-front (React 19 + Vite 6 + Vercel)" style="text;html=1;fontSize=18;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="850" height="35" as="geometry" />
+        </mxCell>
+
+        <!-- Vercel Edge / Entry -->
+        <mxCell id="fe_vercel" value="Vercel Hosting (vercel.json)&#xa;Rewrite: /(.*) -&gt; /index.html&#xa;Env: VITE_API_BASE_URL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EDE7F6;strokeColor=#4527A0;fontStyle=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="270" height="75" as="geometry" />
+        </mxCell>
+
+        <!-- App Shell & Routing -->
+        <mxCell id="fe_router" value="App Shell &amp; Routing&#xa;main.tsx (Redux Provider + BrowserRouter)&#xa;Routers.tsx (17 rutas) + ProtectedRoute.tsx&#xa;MainLayout + AppSidebar (disabled:true Aplazamientos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="380" y="75" width="380" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- State -->
+        <mxCell id="fe_state" value="Estado Global &amp; Persistencia&#xa;Redux Toolkit: authSlice (token, user, periodoAcceso)&#xa;localStorage: token, user, rol, esJefe, theme, festivos-v3&#xa;sessionStorage: justLoggedIn" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="830" y="75" width="360" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- Feature Domains -->
+        <mxCell id="grp_dom" value="Modulos de Paginas y Componentes (src/pages + src/components)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#616161;fontStyle=1;fontSize=12;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="210" width="1150" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="dom_gen" value="Generales&#xa;• Login (SignInSide/Card)&#xa;• DashboardInicio&#xa;• DashboardPerfil&#xa;• CardsPresentacion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;align=left;spacingLeft=10;fontSize=11;" vertex="1" parent="grp_dom">
+          <mxGeometry x="20" y="45" width="250" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="dom_plan" value="Planeacion&#xa;• DashboardSolicitudes&#xa;• DashboardAprobacion&#xa;• DashboardCalendario&#xa;• DashboardHistorico&#xa;• DashboardAdminSolicitudes&#xa;• FormularioSolicitud (.tsx/.logic.ts)&#xa;• PDF Certificado/Memorando&#xa;• CSV SAP Infotipo (9001)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;align=left;spacingLeft=10;fontSize=11;" vertex="1" parent="grp_dom">
+          <mxGeometry x="295" y="45" width="275" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="dom_apl" value="Aplazamientos (disabled:true)&#xa;• DashboardAplazamiento&#xa;• DashboardSolicitudesAplaz.&#xa;• DashboardAprobacionesAplaz.&#xa;• DashboardCalendarioAplaz.&#xa;• DashboardAdminAplazamientos&#xa;• DashboardRechazoAplazamiento&#xa;• FormularioAplazamiento (.logic.ts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F57F17;align=left;spacingLeft=10;fontSize=11;" vertex="1" parent="grp_dom">
+          <mxGeometry x="595" y="45" width="275" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="dom_adm" value="Administrador&#xa;• DashboardUsuarios&#xa;• DashboardDependencias&#xa;• DashboardPeriodoAcceso&#xa;• ReporteExcelDialog&#xa;• ReporteSimplificadoDialog&#xa;• CrearPeriodoPlaneacionDialog" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F7FA;strokeColor=#006064;align=left;spacingLeft=10;fontSize=11;" vertex="1" parent="grp_dom">
+          <mxGeometry x="895" y="45" width="235" height="210" as="geometry" />
+        </mxCell>
+
+        <!-- Hooks & Shared Libs -->
+        <mxCell id="fe_hooks" value="Hooks &amp; Utilidades&#xa;useApi (Axios + Bearer + Notiflix) | fetch (Excel blobs)&#xa;useFestivos | usePeriodoActivo | usePermissions | useVacaciones&#xa;date-utils.ts (YYYY-MM-DD timezone-safe) | shadcn/ui (31 primitivas) + TanStack Table" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="540" width="760" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Backend Target -->
+        <mxCell id="fe_back" value="pave-back API&#xa;${VITE_API_BASE_URL}&#xa;(NestJS /pav/*)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#AD1457;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="880" y="545" width="310" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="fe_e1" style="endArrow=classic;html=1;strokeColor=#4527A0;" edge="1" parent="1" source="fe_vercel" target="fe_router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_e2" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#E65100;" edge="1" parent="1" source="fe_router" target="fe_state">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_e3" style="endArrow=classic;html=1;strokeColor=#1565C0;" edge="1" parent="1" source="fe_router" target="grp_dom">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_e4" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#2E7D32;" edge="1" parent="1" source="grp_dom" target="fe_hooks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="fe_e5" value="HTTPS / JWT" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#AD1457;fontSize=11;" edge="1" parent="1" source="fe_hooks" target="fe_back">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
