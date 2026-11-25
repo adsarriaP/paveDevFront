@@ -28,16 +28,17 @@ export const useFestivos = (year: number): UseFestivosReturn => {
         setError(null);
 
         // Verificar cache local
-        const cacheKey = `festivos-colombia-v3-${year}`;
+        // v4: invalidar cache previo (api-colombia incompleta; ahora cálculo Ley 51/2578)
+        const cacheKey = `festivos-colombia-v4-${year}`;
         const cached = localStorage.getItem(cacheKey);
-        
+
         if (cached) {
           try {
             const { data, timestamp } = JSON.parse(cached);
-            const oneYear = 365 * 24 * 60 * 60 * 1000; // 1 año en milisegundos
-            
-            // Si el cache es válido (menos de 1 año)
-            if (Date.now() - timestamp < oneYear) {
+            const oneDay = 24 * 60 * 60 * 1000; // 1 día (alineado con cache del back)
+
+            // Si el cache es válido (menos de 1 día)
+            if (Date.now() - timestamp < oneDay) {
               setFestivosData(data);
               setFestivos(data.map((f: Festivo) => f.date));
               setLoading(false);
@@ -52,11 +53,11 @@ export const useFestivos = (year: number): UseFestivosReturn => {
         // Cargar desde backend
         console.log(`Cargando festivos para el año ${year}...`);
         const response = await get<Festivo[]>(`/festivos/${year}`);
-        
+
         setFestivosData(response);
         const dates = response.map(f => f.date);
         setFestivos(dates);
-        
+
         // Guardar en cache
         localStorage.setItem(cacheKey, JSON.stringify({
           data: response,
@@ -64,14 +65,14 @@ export const useFestivos = (year: number): UseFestivosReturn => {
         }));
 
         console.log(`Festivos cargados para ${year}:`, dates);
-        
+
       } catch (error: unknown) {
         console.error('Error cargando festivos:', error);
         const err = error as { message?: string };
         setError(err.message || 'Error al cargar días festivos');
 
         // En caso de error, usar cache vencido si existe
-        const cacheKey = `festivos-colombia-v3-${year}`;
+        const cacheKey = `festivos-colombia-v4-${year}`;
         const cached = localStorage.getItem(cacheKey);
         if (cached) {
           try {
